@@ -17,28 +17,23 @@ background:white;
 box-shadow:0 2px 10px rgba(0,0,0,0.1);
 }
 
+.logobox img{
+    height: 40px;
+    width: auto;
+}
+
 .navbar{
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:15px 40px;
+padding:10px 20px;
+flex-wrap: nowrap;
+
 }
 
 .logo{
 color:#ff6600;
 }
-
-.nav-link a{
-margin-left:20px;
-text-decoration:none;
-color:#333;
-font-weight:bold;
-}
-
-.nav-link a:hover{
-color:#ff6600;
-}
-
 .tagline{
 font-size:17px;
 color: green;
@@ -279,10 +274,10 @@ align-items:center;
 .category-select{
 width:90%;
 }
-.navbar{
-    flex-direction: column;
-    gap: 10px;
-}
+/* .navbar{ */
+    /* flex-direction: column; */
+    /* gap: 10px; */
+/* } */
 
 }
 
