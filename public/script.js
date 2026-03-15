@@ -1,3 +1,4 @@
+// 📍 location
 function getLocation(){
 
 if(navigator.geolocation){
@@ -23,18 +24,31 @@ document.getElementById("location-input").value = city
 }
 
 }
-window.onload = getLocation
 
-// for popup add 
 
+// popup close
 function closeAd(){
 document.getElementById("ad-popup").style.display="none"
 }
 
-window.onload = function(){
 
-setTimeout(()=>{
+// page load
+window.addEventListener("load", function(){
+
+getLocation()
+
+// 1️⃣ splash 4 sec
+setTimeout(function(){
+
+document.getElementById("splash").style.display="none"
+
+// 2️⃣ popup 1 sec बाद show
+setTimeout(function(){
+
 document.getElementById("ad-popup").style.display="flex"
+
+},500)
+
 },2000)
 
-}
+})
