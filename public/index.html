@@ -13,6 +13,11 @@
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <link rel="stylesheet" href="style.css">
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
 </head>
 
 
@@ -26,13 +31,26 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     <img src="image/logo.jpg" loading="lazy" alt="logo">
 </div>
 
+<div class="search-box">
+
+
+<input type="text" placeholder="Search product">
+
+
+<button>Search</button>
+
+
+</div>
+
 <div class="location-box">
 
 <i class="fa-solid fa-location-dot"></i>
-
-<span id="location-text">Select Location</span>
+<input type="text" id="location-input" placeholder="Detecting location...">
+<button onclick="getLocation()">📍</button>
 
 </div>
+
+
 </nav>
 
 </header>
@@ -43,68 +61,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
 <section class="hero">
 
-<div class="hero-box">
-
-
-<div class="search-box">
-
-<input type="text" placeholder="Search product">
-
-<button>Search</button>
-
-</div>
-
-
-<div class="search-filter">
-
-<select class="category-select">
-
-<option>All Categories</option>
-<option>Electronics</option>
-<option>Furniture</option>
-<option>Women Fashion</option>
-<option>Makeup</option>
-<option>Books</option>
-<option>Services</option>
-
-</select>
-
-<input type="text" placeholder="City Code">
-
-<button>Search</button>
-
-</div>
-
-
-
-<div class="category-icons">
-
-<div class="cat">
-<i class="fa-solid fa-mobile-screen"></i>
-<p>Electronics</p>
-</div>
-
-<div class="cat">
-<i class="fa-solid fa-couch"></i>
-<p>Furniture</p>
-</div>
-
-<div class="cat">
-<i class="fa-solid fa-car"></i>
-<p>Vehicle</p>
-</div>
-
-<div class="cat">
-<i class="fa-solid fa-shirt"></i>
-<p>Fashion</p>
-</div>
-
-</div>
-
-</div>
-
-
-
 <div class="shop-section">
 
 <h2>Ab Nazdiki Dukan Aapke Ghar Tak</h2>
@@ -113,7 +69,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
 
 <a href="shop.html?name=pritam" class="shop-link">
-
 <div class="shopcard">
 <img src="image/pritamshop.jpg" alt="Pritam Shop">
 <p>Pritam Ji Ka Shop</p>
@@ -147,38 +102,55 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 <img src="image/simantshop.jpg" alt="Utkarsh Shop">
 <p>Utkarsh Shop</p>
 </div>
-
 </a>
 
 
 <a href="shop.html?name=pankaj" class="shop-link">
-
 <div class="shopcard">
 <img src="image/simantshop.jpg" alt="Pankaj Shop">
 <p>Pankaj Shop</p>
 </div>
-
 </a>
 
 
 <a href="shop.html?name=medical" class="shop-link">
-
 <div class="shopcard">
 <img src="image/simantshop.jpg" alt="Medical Store">
 <p>Medical Store</p>
 </div>
-
 </a>
-
-
 </div>
-
 </div>
-
-
 </section>
 
+<div class="category-icons">
 
+
+<div class="cat">
+<i class="fa-solid fa-mobile-screen"></i>
+<p>Electronics</p>
+</div>
+
+
+<div class="cat">
+<i class="fa-solid fa-couch"></i>
+<p>Furniture</p>
+</div>
+
+
+<div class="cat">
+<i class="fa-solid fa-car"></i>
+<p>Vehicle</p>
+</div>
+
+
+<div class="cat">
+<i class="fa-solid fa-shirt"></i>
+<p>Fashion</p>
+</div>
+
+
+</div>
 
 <section class="product">
 
