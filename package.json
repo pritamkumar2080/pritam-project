@@ -1,10 +1,10 @@
 {
   "name": "sitacitymart",
   "version": "1.0.0",
-  "description": "",
+  "description": "This is my first git repository",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
@@ -12,8 +12,17 @@
   "type": "commonjs",
   "dependencies": {
     "body-parser": "^2.2.2",
+    "cors": "^2.8.6",
     "express": "^5.2.1",
     "mongoose": "^9.3.0",
     "multer": "^2.1.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pritamkumar2080/pritam-project.git"
+  },
+  "bugs": {
+    "url": "https://github.com/pritamkumar2080/pritam-project/issues"
+  },
+  "homepage": "https://github.com/pritamkumar2080/pritam-project#readme"
 }

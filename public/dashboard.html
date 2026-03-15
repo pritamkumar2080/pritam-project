@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Product Dashboard</title>
+
+<style>
+
+body{
+font-family:Arial;
+padding:20px;
+}
+
+input{
+margin:5px;
+padding:6px;
+}
+
+button{
+padding:6px 10px;
+background:orange;
+border:none;
+color:white;
+cursor:pointer;
+}
+
+.product{
+border:1px solid #ccc;
+padding:10px;
+margin:10px 0;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h2>Shop Products</h2>
+
+<input id="name" placeholder="product name">
+<input id="price" placeholder="price">
+<input id="image" placeholder="image url">
+<input id="offer" placeholder="offer">
+
+<button onclick="addProduct()">Add Product</button>
+
+<hr>
+
+<div id="products"></div>
+
+<script src="dashboard.js"></script>
+
+</body>
+
+</html>

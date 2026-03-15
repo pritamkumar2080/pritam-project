@@ -1,4 +1,4 @@
-// 📍 location
+// 📍 Location detect
 function getLocation(){
 
 if(navigator.geolocation){
@@ -17,7 +17,11 @@ data.address.city ||
 data.address.town ||
 data.address.village
 
-document.getElementById("location-input").value = city
+const locInput = document.getElementById("location-input")
+
+if(locInput){
+locInput.value = city
+}
 
 })
 
@@ -26,29 +30,126 @@ document.getElementById("location-input").value = city
 }
 
 
-// popup close
+// ❌ popup close
 function closeAd(){
-document.getElementById("ad-popup").style.display="none"
+
+const popup = document.getElementById("ad-popup")
+
+if(popup){
+popup.style.display="none"
+}
+
 }
 
 
-// page load
+// 🌐 page load
 window.addEventListener("load", function(){
 
 getLocation()
 
-// 1️⃣ splash 4 sec
+const splash = document.getElementById("splash")
+const loginBox = document.getElementById("login-box")
+
+if(splash){
+
 setTimeout(function(){
 
-document.getElementById("splash").style.display="none"
+splash.style.display="none"
 
-// 2️⃣ popup 1 sec बाद show
-setTimeout(function(){
+if(loginBox){
+loginBox.style.display="flex"
+}
 
-document.getElementById("ad-popup").style.display="flex"
+},3000)
 
-},500)
+}
+
+})
+
+
+// 🖼 Image Slider
+let slides = document.querySelector(".slides")
+
+if(slides){
+
+let index = 0
+const totalSlides = document.querySelectorAll(".slides img").length
+
+setInterval(()=>{
+
+index++
+
+if(index >= totalSlides){
+index = 0
+}
+
+slides.style.transform = `translateX(-${index * 100}%)`
 
 },2000)
 
+}
+
+
+// 🔐 LOGIN SYSTEM
+function login(){
+
+fetch("/login",{
+
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+
+email:document.getElementById("email").value,
+password:document.getElementById("password").value
+
 })
+
+})
+
+.then(res=>res.json())
+
+.then(data=>{
+
+if(data.status==="fail"){
+alert("Wrong email or password")
+return
+}
+
+const loginBox = document.getElementById("login-box")
+const popup = document.getElementById("ad-popup")
+
+if(loginBox){
+loginBox.style.display="none"
+}
+
+if(popup){
+popup.style.display="flex"
+}
+
+// popup 3 sec baad redirect
+setTimeout(()=>{
+
+if(data.role==="admin"){
+
+window.location.href="admin.html"
+
+}
+else if(data.role==="shopkeeper"){
+
+window.location.href=`dashboard.html?shop=${data.shop}`
+
+}
+else{
+
+window.location.href="index.html"
+
+}
+
+},3000)
+
+})
+
+}

@@ -1,55 +1,22 @@
-async function loadProducts(){
+const urlParams = new URLSearchParams(window.location.search);
+const shopName = urlParams.get("name");
 
-const params = new URLSearchParams(window.location.search)
+document.getElementById("shop-name").innerText =
+shopName + " Shop Products";
 
-const shop = params.get("name")
+const productList = document.getElementById("product-list");
 
-if(!shop){
-alert("Shop not found")
-return
-}
+for(let i=1;i<=50;i++){
 
-try{
+const card = document.createElement("div");
+card.className = "card";
 
-const res = await fetch("/products/" + shop)
+card.innerHTML = `
+<img src="image/images4.jpg">
+<h3>Product ${i}</h3>
+<p>₹${i*10}</p>
+`;
 
-if(!res.ok){
-throw new Error("Server error")
-}
-
-const products = await res.json()
-
-const container = document.getElementById("product-container")
-
-if(products.length === 0){
-container.innerHTML = "<p>No products available</p>"
-return
-}
-
-container.innerHTML = products.map(p =>
-
-`
-
-<div>
-
-<img src="${p.image}" class="product-img">
-
-<h3>${p.name}</h3>
-
-<p>₹${p.price}</p>
-
-</div>
-
-`
-
-).join("")
-
-}catch(error){
-
-console.error(error)
+productList.appendChild(card);
 
 }
-
-}
-
-window.onload = loadProducts

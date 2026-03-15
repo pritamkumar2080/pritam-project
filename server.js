@@ -1,85 +1,109 @@
+const express = require("express");
+const mongoose = require("mongoose");
+const cors = require("cors");
 
-const express = require("express")
-const mongoose = require("mongoose")
-const multer = require("multer")
-const path = require("path")
+const User = require("./models/User");
+const Shop = require("./models/Shop");
+const Product = require("./models/Product");
 
-const app = express()
+const app = express();
 
-app.use(express.json())
-app.use(express.urlencoded({extended:true}))
-app.use(express.static("public"))
+app.use(cors());
+app.use(express.json());
+app.use(express.static("public"));
 
-mongoose.connect("mongodb://localhost:27017/sitacitymart")
+
+// MongoDB connection
+mongoose.connect("mongodb://127.0.0.1:27017/sitacity")
 .then(()=>console.log("MongoDB Connected"))
-
-const storage = multer.diskStorage({
-
-destination:(req,file,cb)=>{
-cb(null,"public/uploads")
-},
-
-filename:(req,file,cb)=>{
-cb(null,Date.now()+path.extname(file.originalname))
-}
-
-})
-
-const upload = multer({storage:storage})
+.catch(err=>console.log(err));
 
 
-const productSchema = new mongoose.Schema({
-shop:String,
-name:String,
-price:Number,
-image:String
-})
+// LOGIN SYSTEM
+app.post("/login", async(req,res)=>{
 
-const Product = mongoose.model("Product",productSchema)
+console.log("Login request:", req.body);
 
-
-// add product
-
-app.post("/add-product", upload.single("image"),async(req,res)=>{
 try{
-    if (!req.body.name || !req.body.price) {
-        return res.status(400).send("Missing data")
-    }
-const product = new Product({
 
-shop:req.body.shop,
-name:req.body.name,
-price:Number(req.body.price),
-image:"/uploads/" +req.file.filename
+const user = await User.findOne({
+email:req.body.email,
+password:req.body.password
+});
 
-})
-
-await product.save()
-
-res.send("Product Added")
-} catch (err) {
-    console.log(err)
-    res.status(500).send("error adding product")
+if(!user){
+return res.json({status:"fail"});
 }
 
-})
+res.json({
+status:"ok",
+role:user.role,
+shop:user.shop
+});
+
+}catch(err){
+
+console.log(err);
+res.status(500).json({status:"error"});
+
+}
+
+});
 
 
-// get products
+// GET ALL SHOPS (ADMIN)
+app.get("/shops", async(req,res)=>{
 
+const shops = await Shop.find();
+res.json(shops);
+
+});
+
+
+// GET PRODUCTS BY SHOP
 app.get("/products/:shop", async(req,res)=>{
-    try{
 
-const products = await Product.find({shop:req.params.shop})
+const products = await Product.find({
+shop:req.params.shop
+});
 
-res.json(products)
-    } catch (err) {
-        res.status(500).json({error:"server error"})
-    }
+res.json(products);
 
-})
+});
+
+
+// ADD PRODUCT
+app.post("/product", async(req,res)=>{
+
+const product = new Product(req.body);
+
+await product.save();
+
+res.json({message:"product added"});
+
+});
+
+
+// UPDATE PRODUCT
+app.put("/product/:id", async(req,res)=>{
+
+await Product.findByIdAndUpdate(req.params.id,req.body);
+
+res.json({message:"updated"});
+
+});
+
+
+// DELETE PRODUCT
+app.delete("/product/:id", async(req,res)=>{
+
+await Product.findByIdAndDelete(req.params.id);
+
+res.json({message:"deleted"});
+
+});
 
 
 app.listen(3000,()=>{
-console.log("Server running on port 3000")
-})
+console.log("Server running on port 3000");
+});

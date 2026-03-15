@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input id="name" placeholder="product name">
+<input id="price" placeholder="price">
+
+<button onclick="addProduct()">Add Product</button>
+
+<script>
+
+function addProduct(){
+
+fetch("/add-product",{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+
+name:document.getElementById("name").value,
+price:document.getElementById("price").value,
+shop:"pritam"
+
+})
+
+});
+
+}
+
+</script>
+</body>
+</html>
