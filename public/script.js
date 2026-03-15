@@ -25,3 +25,16 @@ document.getElementById("location-input").value = city
 }
 window.onload = getLocation
 
+// for popup add 
+
+function closeAd(){
+document.getElementById("ad-popup").style.display="none"
+}
+
+window.onload = function(){
+
+setTimeout(()=>{
+document.getElementById("ad-popup").style.display="flex"
+},2000)
+
+}
